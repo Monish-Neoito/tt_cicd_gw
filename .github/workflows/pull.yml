@@ -1,0 +1,38 @@
+name: PULL
+on:
+  pull_request:
+    branches: [ "main","release_*" ]
+
+  workflow_dispatch:
+
+jobs:
+  build_for_linux:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: "Checkout the repo"
+        uses: actions/checkout@v3
+
+      - name: "Compiling the application"
+        run: rustc src/main.rs
+      
+      - name: "Tests "
+        run: cargo test
+
+  build_for_win:
+
+     runs-on: windows-latest
+     steps:
+      - name: "Checkout the repo"
+        uses: actions/checkout@v3
+
+      - name: "Compiling the application"
+        run: rustc src/main.rs
+
+      - name: "Tests "
+        run: cargo test
+
+
+
