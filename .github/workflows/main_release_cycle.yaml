@@ -1,23 +1,20 @@
-name: first
+name: main_release_test_cycle
 
-on:
+on: 
   push:
-    branches: ["main"]
-  pull_request:
     branches: ["main"]
 
   workflow_dispatch:
 
-jobs:
-  compile:
+jobs: 
+  run_pre_release_tests:
     runs-on: ubuntu-18.04
-    steps:
+    steps: 
+      - name: checkouts repository
       - uses: actions/checkout@v3
-      - name: Compile using rustc
+      - name: Compile application
         run: rustc src/main.rs
-
+      
       - name: run tests
         run: cargo test
-
-      - name: deploy to Heroku
-        run: echo "Deploy"
+      
